@@ -11,18 +11,9 @@ class PropiedadesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $query = Propiedades::query();
-        $request->has('nombre');            
-        $nombreParaFiltrar = $request->nombre;
-
-        if ($nombreParaFiltrar) {
-            $query->where('nombre', 'like', '%'.$request->nombre.'%');
-        }
-
-        $propiedades = $query->get();
-        return view('inicio', compact('propiedades'));
+       view('propiedades');
     }
 
     /**

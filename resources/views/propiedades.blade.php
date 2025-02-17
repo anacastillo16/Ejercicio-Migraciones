@@ -8,10 +8,6 @@
 <body>
     <header>
         <h1>Inmobiliaria Ana</h1>
-        <a href="{{ route('propiedades.create') }}">Crear Propiedad</a>
-        <a href="{{ route('agentes.create') }}">Crear Agente</a>
-        <a href="{{ route('categorias.create') }}">Crear Categoría</a>
     </header>
-    
 </body>
 </html>
