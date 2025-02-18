@@ -12,7 +12,7 @@ class AgentesController extends Controller
      */
     public function index()
     {
-        //
+        return view('agentes');
     }
 
     /**

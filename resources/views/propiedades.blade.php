@@ -8,6 +8,10 @@
 <body>
     <header>
         <h1>Inmobiliaria Ana</h1>
+        <nav>
+            <a href="{{ route("agentes.index") }}">Agentes</a>
+            <a href="{{ route('categorias.index') }}">Categorías</a>
+        </nav>
     </header>
 </body>
 </html>

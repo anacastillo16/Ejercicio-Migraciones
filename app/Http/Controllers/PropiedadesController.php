@@ -13,7 +13,7 @@ class PropiedadesController extends Controller
      */
     public function index()
     {
-       view('propiedades');
+       return view('propiedades');
     }
 
     /**
@@ -21,7 +21,7 @@ class PropiedadesController extends Controller
      */
     public function create()
     {
-        return view('crearpropiedad');
+        //
     }
 
     /**
