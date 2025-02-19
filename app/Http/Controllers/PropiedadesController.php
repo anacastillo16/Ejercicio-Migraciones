@@ -13,7 +13,9 @@ class PropiedadesController extends Controller
      */
     public function index()
     {
-       return view('propiedades');
+        $propiedades = Propiedades::all();
+
+        return view('propiedades', compact('propiedades'));
     }
 
     /**
@@ -21,7 +23,7 @@ class PropiedadesController extends Controller
      */
     public function create()
     {
-        //
+        return view('crearPropiedad');
     }
 
     /**
@@ -37,7 +39,8 @@ class PropiedadesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $propiedad = Propiedades::findOrFail($id);
+        return view('propiedades.show', compact('propiedad'));
     }
 
     /**
