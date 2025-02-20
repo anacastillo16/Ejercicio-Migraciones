@@ -23,7 +23,7 @@ class PropiedadesController extends Controller
      */
     public function create()
     {
-        return view('crearPropiedad');
+        return view('crearpropiedad');
     }
 
     /**
@@ -31,7 +31,13 @@ class PropiedadesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'direccion' => 'required'
+        ]);
+
+        Propiedades::create($request->all());
+        return redirect()->route('propiedades.index')->with('success', 'Propiedad creada');
     }
 
     /**
@@ -40,7 +46,7 @@ class PropiedadesController extends Controller
     public function show(string $id)
     {
         $propiedad = Propiedades::findOrFail($id);
-        return view('propiedades.show', compact('propiedad'));
+        return view('mostrarpropiedad', compact('propiedad'));
     }
 
     /**
@@ -48,7 +54,8 @@ class PropiedadesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $propiedad = Propiedades::findOrFail($id);
+        return view('editarpropiedad', compact('propiedad'));
     }
 
     /**
@@ -56,7 +63,9 @@ class PropiedadesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $propiedad = Propiedades::findOrFail($id);
+        $propiedad->update($request->all());
+        return redirect()->route('propiedades.index')->with('success', 'Propiedad actualizada');
     }
 
     /**
@@ -64,6 +73,8 @@ class PropiedadesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $propiedad = Propiedades::findOrFail($id);
+        $propiedad->delete();
+        return redirect()->route('propiedades.index')->with('success', 'Propiedad eliminada');
     }
 }
