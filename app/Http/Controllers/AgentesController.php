@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Agentes;
 
 class AgentesController extends Controller
 {
@@ -12,7 +13,8 @@ class AgentesController extends Controller
      */
     public function index()
     {
-        return view('agentes');
+        $agentes = Agentes::all();
+        return view('agentes', compact('agentes'));
     }
 
     /**
@@ -20,7 +22,7 @@ class AgentesController extends Controller
      */
     public function create()
     {
-        //
+        return view('crearagente');
     }
 
     /**
@@ -28,7 +30,13 @@ class AgentesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'telefono' => 'required'
+        ]);
+
+        Agentes::create($request->all());
+        return redirect()->route('agentes.index')->with('success', 'Agente creado');
     }
 
     /**
@@ -36,7 +44,8 @@ class AgentesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $agente = Agentes::findOrFail($id);
+        return view('mostraragente', compact('agente'));
     }
 
     /**
@@ -44,7 +53,8 @@ class AgentesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $agente = Agentes::findOrFail($id);
+        return view('editaragente', compact('agente'));
     }
 
     /**
@@ -52,7 +62,9 @@ class AgentesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $agente = Agentes::findOrFail($id);
+        $agente->update($request->all());
+        return redirect()->route('agentes.index')->with('success', 'Agente actualizado');
     }
 
     /**
@@ -60,6 +72,8 @@ class AgentesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $agente = Agentes::findOrFail($id);
+        $agente->delete();
+        return redirect()->route('agentes.index')->with('success', 'Agente eliminado');
     }
 }
